@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import requestService from "../service/RequestService";
+import cacheService from "../service/CacheService";
 
 interface userDetails {
   username: string;
@@ -32,6 +33,7 @@ export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle 
       setUsername(credential.username);
       handleToggle();
       setMsg("");
+      cacheService.saveLocalValue("username", credential.username);
     } else {
       setMsg("Wrong credentials");
     }
@@ -39,7 +41,7 @@ export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="">Användarnamn</label>
+        <label>Användarnamn</label>
         <input
           name="username"
           type="text"
@@ -49,7 +51,7 @@ export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle 
         />
       </div>
       <div>
-        <label htmlFor="">Lössenord</label>
+        <label>Lössenord</label>
         <input
           name="password"
           type="password"

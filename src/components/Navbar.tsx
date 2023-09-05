@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LoginForm } from "./LoginForm";
+import cacheService from "../service/CacheService";
 
 export const Navbar: React.FC = () => {
   const [toggle, setToggle] = useState<boolean>(false);
@@ -12,6 +13,7 @@ export const Navbar: React.FC = () => {
   const handleLogout = () => {
     setToggle(false);
     setUsername("");
+    cacheService.removeLocalValue("username");
   };
   return (
     <div>
