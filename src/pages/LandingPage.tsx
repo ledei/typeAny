@@ -18,7 +18,7 @@ const LandingPage = (): JSX.Element => {
         aliquam ratione quas, doloribus, molestias delectus nam assumenda qui
         reiciendis illum sunt!
       </p>
-      <button>Se här</button>
+      <button>Se mer</button>
       </div>
     </div>
   );
