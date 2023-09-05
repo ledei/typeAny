@@ -1,19 +1,14 @@
 import { users } from "../data/users.json";
-
-type userDetails = {
-  username: string;
-  password: string;
-  roll: string;
-};
+import { User } from "../types/User";
 
 type requestInputProps = {
   username: string;
   password: string;
 };
-const fetchUser = async ({ username }: requestInputProps): Promise<userDetails> => {
+const fetchUser = async ({ username }: requestInputProps): Promise<User> => {
   const findUserData = users.find((user) => user.username === username);
 
-  return findUserData as userDetails;
+  return findUserData as User;
 };
 
 const authUser = async (userDeatils: requestInputProps): Promise<boolean> => {
