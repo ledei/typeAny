@@ -3,12 +3,14 @@
     {
       "username": "greta",
       "password": "123",
-      "roll": "USER"
+      "roll": "USER",
+      "booked": []
     },
     {
       "username": "bob",
       "password": "123",
-      "roll": "ADMIN"
+      "roll": "ADMIN",
+      "booked": []
     }
   ]
 }

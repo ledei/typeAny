@@ -6,7 +6,8 @@
       "start": 1100,
       "end": 1300,
       "date": "2023-09-05",
-      "spots": 15
+      "spots": 15,
+      "registerd": []
     }
   ]
 }
