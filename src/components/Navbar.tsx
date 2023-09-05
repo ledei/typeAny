@@ -11,7 +11,7 @@ export const Navbar: React.FC = () => {
   return (
     <div>
       <Link to="booking"> Våra pass</Link>
-      <Link to="home"> Hem</Link>
+      <Link to="/"> Hem</Link>
       <p>Strong n' Epic</p>
       {username !== "" && <p>inloggad som {username}</p>}
       <button onClick={handleToggle}>Logga in</button>
