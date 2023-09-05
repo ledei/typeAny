@@ -20,6 +20,11 @@ export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle 
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
 
+  const handleCancelBtn = () => {
+    handleToggle();
+    setCredential({ username: "", password: "" });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await requestService.authUser(credential);
@@ -56,7 +61,9 @@ export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle 
       {msg !== "" && <p>{msg}</p>}
 
       <button type="submit">Login</button>
-      <button>avbryt</button>
+      <button type="reset" onClick={handleCancelBtn}>
+        avbryt
+      </button>
       <p>
         Har du inget konto <Link to="signup">Klicka Här</Link>
       </p>
