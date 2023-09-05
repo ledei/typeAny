@@ -4,7 +4,6 @@ import requestService from "../service/RequestService";
 
 interface quaryProps {
   username: string;
-  password: string;
 }
 
 const userDefult: User = {
