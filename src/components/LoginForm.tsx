@@ -11,17 +11,19 @@ interface userDetails {
 type LoginformProps = {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   handleToggle: () => void;
+  message: string;
+  setMsg: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle }) => {
+export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle, message, setMsg }) => {
   const [credential, setCredential] = useState<userDetails>({ username: "", password: "" });
-  const [msg, setMsg] = useState<string>("");
 
   const handleCredential = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
 
   const handleCancelBtn = () => {
+    setMsg("");
     handleToggle();
     setCredential({ username: "", password: "" });
   };
@@ -60,7 +62,7 @@ export const LoginForm: React.FC<LoginformProps> = ({ setUsername, handleToggle 
           }}
         />
       </div>
-      {msg !== "" && <p>{msg}</p>}
+      {message !== "" && <p>{message}</p>}
 
       <button type="submit">Login</button>
       <button type="reset" onClick={handleCancelBtn}>

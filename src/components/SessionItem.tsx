@@ -5,15 +5,23 @@ import sessionService from "../service/SessionService";
 
 interface SessionItemProps {
   session: Session;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setMsg: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SessionItem: React.FC<SessionItemProps> = ({ session }) => {
+const SessionItem: React.FC<SessionItemProps> = ({ session, setToggle, setMsg }) => {
   const [spot] = useState<number>(session.spots);
   const [registerds, setRegisterds] = useState<number>(session.registerd.length);
 
   const handleBooking = async () => {
-    const username = await cacheService.getLocalValue("username");
-    if (username === null) return false;
+    let username: string = "";
+    try {
+      username = await cacheService.getLocalValue("username");
+    } catch (error) {
+      setToggle(true);
+      setMsg("Måste vara inloggad för att boka");
+    }
+
     const title = session.title;
     const res = await sessionService.sessionRegister({ title, username });
     if (res === "added") {
