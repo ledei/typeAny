@@ -6,12 +6,12 @@ import { Session } from "../types/Session";
 const useFetchSession = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [data, setData] = useState<Session>();
+  const [data, setData] = useState<Session[]>();
   useEffect(() => {
     (async function () {
       try {
         setIsLoading(true);
-        const response = await requestService.fetchSession();
+        const response = await requestService.fetchSessions();
         setData(response);
       } catch (err) {
         setError(true);
