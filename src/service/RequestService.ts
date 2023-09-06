@@ -12,15 +12,6 @@ type authUserInputProps = {
   password: string;
 };
 
-// const session: Session = {
-//   title: string;
-//   desc: string;
-//   start: number;
-//   end: number;
-//   date: Date;
-//   spots: number;
-//   registerd: User[];
-// };
 const fetchUser = async ({ username }: fetchUserInputProps): Promise<User> => {
   const findUserData = users.find((user) => user.username === username);
 
@@ -34,12 +25,12 @@ const authUser = async (userDeatils: authUserInputProps): Promise<boolean> => {
   return true;
 };
 
-const fetchSession = async (): Promise<Session> => {
-  const session = sessions as unknown as Session;
-  if (session === undefined) throw new Error("");
+const fetchSessions = async (): Promise<Session[]> => {
+  const session = sessions as Session[];
+  if (session === undefined) throw new Error("something went wrong with session");
   return session;
 };
 
-const requestService = { fetchUser, authUser, fetchSession };
+const requestService = { fetchUser, authUser, fetchSessions };
 
 export default requestService;
