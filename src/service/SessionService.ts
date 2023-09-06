@@ -16,6 +16,6 @@ const sessionRegister = async ({ title, username }: sessionRegister): Promise<st
   return "added";
 };
 
-const todoService = { sessionRegister };
+const sessionService = { sessionRegister };
 
-export default todoService;
+export default sessionService;
