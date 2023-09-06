@@ -1,32 +1,50 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Session } from "../types/Session";
+import cacheService from "../service/CacheService";
+import sessionService from "../service/SessionService";
 
-function SessionItem({ title, desc, start, end, date, spots }) {
-  const [spots] = useState(spots);
-  const [registerd, setRegisterd] = useState(registerd.length);
+interface SessionItemProps {
+  session: Session;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setMsg: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  // const handleBooking = () => {
-  //   setRegisterd(...registerd[username], username);
-  // };
-  
-  
+const SessionItem: React.FC<SessionItemProps> = ({ session, setToggle, setMsg }) => {
+  const [spot] = useState<number>(session.spots);
+  const [registerds, setRegisterds] = useState<number>(session.registerd.length);
+
+  const handleBooking = async () => {
+    let username: string = "";
+    try {
+      username = await cacheService.getLocalValue("username");
+    } catch (error) {
+      setToggle(true);
+      setMsg("Måste vara inloggad för att boka");
+      return false;
+    }
+
+    const title = session.title;
+    const res = await sessionService.sessionRegister({ title, username });
+    if (res === "added") {
+      setRegisterds(session.registerd.length);
+    } else {
+      console.log(res);
+    }
+  };
 
   return (
     <div className="Container">
-      <h5>{title}</h5>
-      <p>{desc}</p>
-      <p>Starttid: {start}</p>
-      <p>Sluttid: {end}</p>
-      <p>Datum: {date}</p>
-      <p>Antal platser: {spots}</p>
+      <h5>{session.title}</h5>
+      <p>{session.desc}</p>
+      <p>Starttid: {session.start}</p>
+      <p>Sluttid: {session.end}</p>
+      <p>Datum: {session.date}</p>
+      <p>
+        Antal platser:{registerds}/{session.spots}
+      </p>
 
-      {registerd ==! spots ? (
-        <button onClick={handleBooking}>Boka nu</button>
-      ) : (
-        <button>Fullbokad</button>
-      )}
+      {registerds !== spot ? <button onClick={handleBooking}>Boka nu</button> : <button>Fullbokad</button>}
     </div>
   );
-}
+};
 export default SessionItem;
-
-//   {username !== "" && <p>Inloggad som {username}</p>}

@@ -5,7 +5,7 @@ export interface Session {
   desc: string;
   start: number;
   end: number;
-  date: Date;
+  date: string;
   spots: number;
   registerd: User[];
 }
