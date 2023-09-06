@@ -20,6 +20,7 @@ const SessionItem: React.FC<SessionItemProps> = ({ session, setToggle, setMsg })
     } catch (error) {
       setToggle(true);
       setMsg("Måste vara inloggad för att boka");
+      return false;
     }
 
     const title = session.title;
@@ -27,7 +28,7 @@ const SessionItem: React.FC<SessionItemProps> = ({ session, setToggle, setMsg })
     if (res === "added") {
       setRegisterds(session.registerd.length);
     } else {
-      console.log("something went wrong");
+      console.log(res);
     }
   };
 

@@ -16,7 +16,7 @@ function App(): JSX.Element {
     } catch (error) {
       setUsername("");
     }
-  }, [username]);
+  }, []);
 
   return (
     <>
